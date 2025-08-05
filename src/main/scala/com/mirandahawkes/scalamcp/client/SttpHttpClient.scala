@@ -38,7 +38,7 @@ object SttpHttpClient extends FileLogging:
     if (response.code.isSuccess) {
       response.body.fromJson[T] match {
         case Right(result) =>
-          logger.info(s"Response: ${response.statusText}")
+          logger.info(s"Response: ${response.code}")
           result
         case Left(error) =>
           logger.error(

@@ -23,6 +23,7 @@ sealed trait Party:
 
 object Party:
   implicit val decoder: JsonDecoder[Party] = DeriveJsonDecoder.gen[Party]
+  implicit val encode: JsonEncoder[Party] = DeriveJsonEncoder.gen[Party]
 
 @jsonHint("person")
 case class Person(
@@ -51,6 +52,7 @@ case class Person(
 
 object Person:
   implicit val decoder: JsonDecoder[Person] = DeriveJsonDecoder.gen[Person]
+  implicit val encode: JsonEncoder[Person] = DeriveJsonEncoder.gen[Person]
 
 @jsonHint("organisation")
 case class Organisation(
@@ -76,99 +78,5 @@ case class Organisation(
 object Organisation:
   implicit val decoder: JsonDecoder[Organisation] =
     DeriveJsonDecoder.gen[Organisation]
-
-// Nested supporting classes
-case class Address(
-    id: Long,
-    `type`: String,
-    street: Option[String],
-    city: Option[String],
-    state: Option[String],
-    country: Option[String],
-    zip: Option[String]
-)
-object Address:
-  implicit val decoder: JsonDecoder[Address] = DeriveJsonDecoder.gen[Address]
-
-case class PhoneNumber(
-    id: Long,
-    `type`: Option[String],
-    number: String
-)
-
-object PhoneNumber:
-  implicit val decoder: JsonDecoder[PhoneNumber] =
-    DeriveJsonDecoder.gen[PhoneNumber]
-
-case class Website(
-    id: Long,
-    service: String,
-    address: String,
-    `type`: Option[String],
-    url: String
-)
-
-object Website:
-  implicit val decoder: JsonDecoder[Website] = DeriveJsonDecoder.gen[Website]
-
-case class EmailAddress(
-    id: Long,
-    `type`: Option[String],
-    address: String
-)
-object EmailAddress:
-  implicit val decoder: JsonDecoder[EmailAddress] =
-    DeriveJsonDecoder.gen[EmailAddress]
-
-// End nested supporting classes
-
-case class Tag(
-    id: Long,
-    name: String,
-    description: Option[String]
-)
-
-object Tag:
-  implicit val decoder: JsonDecoder[Tag] = DeriveJsonDecoder.gen[Tag]
-
-case class FieldDefinition(
-    id: String,
-    name: String
-)
-
-object FieldDefinition:
-  implicit val decoder: JsonDecoder[FieldDefinition] =
-    DeriveJsonDecoder.gen[FieldDefinition]
-
-case class FieldValue(
-    id: Long,
-    value: String,
-    definition: FieldDefinition
-)
-
-object FieldValue:
-  implicit val decoder: JsonDecoder[FieldValue] =
-    DeriveJsonDecoder.gen[FieldValue]
-
-case class User(
-    id: Long,
-    username: String,
-    name: String
-)
-
-object User:
-  implicit val decoder: JsonDecoder[User] = DeriveJsonDecoder.gen[User]
-
-case class Team(
-    id: Long,
-    name: Option[String]
-)
-
-object Team:
-  implicit val decoder: JsonDecoder[Team] = DeriveJsonDecoder.gen[Team]
-
-case class PartyListWrapper(parties: List[Party])
-
-object PartyListWrapper:
-  implicit val decoder: JsonDecoder[PartyListWrapper] =
-    DeriveJsonDecoder.gen[PartyListWrapper]
+  implicit val encode: JsonEncoder[Organisation] =
+    DeriveJsonEncoder.gen[Organisation]
