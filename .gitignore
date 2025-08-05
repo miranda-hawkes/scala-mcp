@@ -45,3 +45,11 @@ build/
 
 ### Scala ###
 .bsp/
+
+### Scala CLI ###
+.bsp/
+.scala-cli/
+.scala-build/
+
+### Log files ###
+scala-mcp.log
