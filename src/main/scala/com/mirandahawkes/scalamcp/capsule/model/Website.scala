@@ -1,4 +1,4 @@
-package com.mirandahawkes.scalamcp.model
+package com.mirandahawkes.scalamcp.capsule.model
 
 import zio.json.*
 

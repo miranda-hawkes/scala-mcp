@@ -1,6 +1,9 @@
-package com.mirandahawkes.scalamcp.model
+package com.mirandahawkes.scalamcp.capsule.model
 
 import zio.json.*
+
+enum PartyType:
+  case person, organisation
 
 @jsonDiscriminator("type")
 sealed trait Party:
@@ -25,10 +28,10 @@ object Party:
   implicit val decoder: JsonDecoder[Party] = DeriveJsonDecoder.gen[Party]
   implicit val encode: JsonEncoder[Party] = DeriveJsonEncoder.gen[Party]
 
-@jsonHint("person")
+@jsonHint(PartyType.person.toString)
 case class Person(
     id: Long,
-    `type`: String = "person",
+    `type`: String = PartyType.person.toString,
     firstName: Option[String],
     lastName: Option[String],
     title: Option[String],
@@ -54,10 +57,10 @@ object Person:
   implicit val decoder: JsonDecoder[Person] = DeriveJsonDecoder.gen[Person]
   implicit val encode: JsonEncoder[Person] = DeriveJsonEncoder.gen[Person]
 
-@jsonHint("organisation")
+@jsonHint(PartyType.organisation.toString)
 case class Organisation(
     id: Long,
-    `type`: String = "organisation",
+    `type`: String = PartyType.organisation.toString,
     name: Option[String],
     about: Option[String],
     createdAt: Option[String],
